@@ -1,0 +1,39 @@
+[plugin]
+name        = "deny"
+version     = "0.1.0"
+description = "运行 cargo deny check，检查许可证合规与依赖策略违规"
+author      = "rust-checker"
+category    = "security"
+tags        = ["license", "deny", "compliance", "policy"]
+
+[command]
+program = "cargo"
+args    = ["deny", "check"]
+
+[report]
+parser      = "builtin::deny"
+output_path = "security/deny.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "检查结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "license_violations"
+type        = "list"
+description = "许可证违规列表"
+
+[[output_schema.fields]]
+name        = "license_warnings"
+type        = "list"
+description = "许可证警告列表"
+
+[[output_schema.fields]]
+name        = "banned_crates"
+type        = "list"
+description = "被禁止的 crate 列表"
+
+[[dependencies.required]]
+name    = "cargo-deny"
+install = "cargo install cargo-deny"

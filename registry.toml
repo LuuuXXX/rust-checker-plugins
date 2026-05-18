@@ -1,0 +1,110 @@
+# rust-checker-plugins 插件注册索引
+# 每个 [[plugin]] 条目对应 plugins/<name>/plugin.toml
+
+[[plugin]]
+name     = "build"
+version  = "0.1.0"
+category = "quality"
+path     = "plugins/build/plugin.toml"
+
+[[plugin]]
+name     = "test"
+version  = "0.1.0"
+category = "quality"
+path     = "plugins/test/plugin.toml"
+
+[[plugin]]
+name     = "coverage"
+version  = "0.1.0"
+category = "quality"
+path     = "plugins/coverage/plugin.toml"
+
+[[plugin]]
+name     = "clippy"
+version  = "0.1.0"
+category = "quality"
+path     = "plugins/clippy/plugin.toml"
+
+[[plugin]]
+name     = "fmt"
+version  = "0.1.0"
+category = "quality"
+path     = "plugins/fmt/plugin.toml"
+
+[[plugin]]
+name     = "doc"
+version  = "0.1.0"
+category = "quality"
+path     = "plugins/doc/plugin.toml"
+
+[[plugin]]
+name     = "audit"
+version  = "0.1.0"
+category = "security"
+path     = "plugins/audit/plugin.toml"
+
+[[plugin]]
+name     = "deny"
+version  = "0.1.0"
+category = "security"
+path     = "plugins/deny/plugin.toml"
+
+[[plugin]]
+name     = "geiger"
+version  = "0.1.0"
+category = "security"
+path     = "plugins/geiger/plugin.toml"
+
+[[plugin]]
+name     = "msrv"
+version  = "0.1.0"
+category = "compat"
+path     = "plugins/msrv/plugin.toml"
+
+[[plugin]]
+name     = "semver"
+version  = "0.1.0"
+category = "compat"
+path     = "plugins/semver/plugin.toml"
+
+[[plugin]]
+name     = "binary"
+version  = "0.1.0"
+category = "compat"
+path     = "plugins/binary/plugin.toml"
+
+[[plugin]]
+name     = "deps"
+version  = "0.1.0"
+category = "deps"
+path     = "plugins/deps/plugin.toml"
+
+[[plugin]]
+name     = "udeps"
+version  = "0.1.0"
+category = "deps"
+path     = "plugins/udeps/plugin.toml"
+
+[[plugin]]
+name     = "flamegraph"
+version  = "0.1.0"
+category = "perf"
+path     = "plugins/flamegraph/plugin.toml"
+
+[[plugin]]
+name     = "bench"
+version  = "0.1.0"
+category = "perf"
+path     = "plugins/bench/plugin.toml"
+
+[[plugin]]
+name     = "bloat"
+version  = "0.1.0"
+category = "perf"
+path     = "plugins/bloat/plugin.toml"
+
+[[plugin]]
+name     = "metrics"
+version  = "0.1.0"
+category = "perf"
+path     = "plugins/metrics/plugin.toml"

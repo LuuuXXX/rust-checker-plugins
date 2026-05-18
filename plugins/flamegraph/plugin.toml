@@ -1,0 +1,39 @@
+[plugin]
+name        = "flamegraph"
+version     = "0.1.0"
+description = "运行 cargo flamegraph，生成性能火焰图并提取 Top-5 热点函数"
+author      = "rust-checker"
+category    = "perf"
+tags        = ["perf", "flamegraph", "profiling"]
+
+[command]
+program = "cargo"
+args    = ["flamegraph", "--output", ".localcheck/reports/perf/flamegraph.svg"]
+
+[report]
+parser      = "builtin::flamegraph"
+output_path = "perf/flamegraph.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error / skipped"
+
+[[output_schema.fields]]
+name        = "svg_path"
+type        = "string"
+description = "火焰图 SVG 文件路径"
+
+[[output_schema.fields]]
+name        = "top_functions"
+type        = "list"
+description = "Top-5 热点函数列表（函数名 / 占比）"
+
+[[output_schema.fields]]
+name        = "platform_note"
+type        = "string"
+description = "平台差异说明（Linux perf / macOS DTrace）"
+
+[[dependencies.required]]
+name    = "cargo-flamegraph"
+install = "cargo install flamegraph"

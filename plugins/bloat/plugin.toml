@@ -1,0 +1,44 @@
+[plugin]
+name        = "bloat"
+version     = "0.1.0"
+description = "运行 cargo bloat --release，分析 release 二进制的体积贡献来源"
+author      = "rust-checker"
+category    = "perf"
+tags        = ["perf", "binary-size", "bloat"]
+
+[command]
+program = "cargo"
+args    = ["bloat", "--release", "--crates", "-n", "20"]
+
+[report]
+parser      = "builtin::bloat"
+output_path = "perf/bloat.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error"
+
+[[output_schema.fields]]
+name        = "total_size_bytes"
+type        = "integer"
+description = "二进制总体积（字节）"
+
+[[output_schema.fields]]
+name        = "text_section_bytes"
+type        = "integer"
+description = ".text 段体积（字节）"
+
+[[output_schema.fields]]
+name        = "top_crate"
+type        = "string"
+description = "体积贡献最大的 crate"
+
+[[output_schema.fields]]
+name        = "contributions"
+type        = "list"
+description = "体积贡献 Top-N 列表（crate / 大小 / 占比）"
+
+[[dependencies.required]]
+name    = "cargo-bloat"
+install = "cargo install cargo-bloat"

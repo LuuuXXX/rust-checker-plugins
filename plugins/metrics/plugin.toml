@@ -1,0 +1,39 @@
+[plugin]
+name        = "metrics"
+version     = "0.1.0"
+description = "使用 cargo geiger 的基础指标模式，收集代码行数、圈复杂度与 unsafe 代码比例"
+author      = "rust-checker"
+category    = "perf"
+tags        = ["metrics", "complexity", "loc", "unsafe"]
+
+[command]
+program = "cargo"
+args    = ["geiger", "--output-format", "Json", "--quiet"]
+
+[report]
+parser      = "builtin::metrics"
+output_path = "perf/metrics.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error"
+
+[[output_schema.fields]]
+name        = "total_lines"
+type        = "integer"
+description = "代码总行数（不含注释和空行）"
+
+[[output_schema.fields]]
+name        = "unsafe_ratio_pct"
+type        = "float"
+description = "unsafe 代码占比（百分比）"
+
+[[output_schema.fields]]
+name        = "cyclomatic_complexity"
+type        = "float"
+description = "平均圈复杂度"
+
+[[dependencies.required]]
+name    = "cargo-geiger"
+install = "cargo install cargo-geiger"

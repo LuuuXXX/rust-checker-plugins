@@ -1,0 +1,30 @@
+[plugin]
+name        = "fmt"
+version     = "0.1.0"
+description = "运行 cargo fmt --check，检查代码格式是否符合 rustfmt 规范"
+author      = "rust-checker"
+category    = "quality"
+tags        = ["format", "rustfmt", "style"]
+
+[command]
+program = "cargo"
+args    = ["fmt", "--all", "--", "--check"]
+
+[report]
+parser      = "builtin::fmt"
+output_path = "quality/fmt.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "检查结果：ok / error"
+
+[[output_schema.fields]]
+name        = "unformatted_files"
+type        = "list"
+description = "格式不符合规范的文件列表"
+
+[[output_schema.fields]]
+name        = "diff_lines"
+type        = "integer"
+description = "格式差异总行数"

@@ -1,0 +1,35 @@
+[plugin]
+name        = "deps"
+version     = "0.1.0"
+description = "运行 cargo tree，分析依赖树结构、重复依赖及依赖统计"
+author      = "rust-checker"
+category    = "deps"
+tags        = ["deps", "dependency", "tree"]
+
+[command]
+program = "cargo"
+args    = ["tree", "--duplicate"]
+
+[report]
+parser      = "builtin::deps"
+output_path = "deps/deps.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error"
+
+[[output_schema.fields]]
+name        = "total_deps"
+type        = "integer"
+description = "依赖总数"
+
+[[output_schema.fields]]
+name        = "direct_deps"
+type        = "integer"
+description = "直接依赖数量"
+
+[[output_schema.fields]]
+name        = "duplicate_deps"
+type        = "list"
+description = "重复依赖列表（包名 / 版本列表）"

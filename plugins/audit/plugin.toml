@@ -1,0 +1,49 @@
+[plugin]
+name        = "audit"
+version     = "0.1.0"
+description = "运行 cargo audit，检查依赖中的已知安全漏洞（CVE），按严重级别分类输出"
+author      = "rust-checker"
+category    = "security"
+tags        = ["security", "audit", "cve", "vulnerability"]
+
+[command]
+program = "cargo"
+args    = ["audit", "--json"]
+
+[report]
+parser      = "builtin::audit"
+output_path = "security/audit.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "检查结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "critical"
+type        = "integer"
+description = "严重漏洞数量"
+
+[[output_schema.fields]]
+name        = "high"
+type        = "integer"
+description = "高危漏洞数量"
+
+[[output_schema.fields]]
+name        = "medium"
+type        = "integer"
+description = "中危漏洞数量"
+
+[[output_schema.fields]]
+name        = "low"
+type        = "integer"
+description = "低危漏洞数量"
+
+[[output_schema.fields]]
+name        = "vulnerabilities"
+type        = "list"
+description = "漏洞详情列表（CVE / 受影响包 / 修复版本）"
+
+[[dependencies.required]]
+name    = "cargo-audit"
+install = "cargo install cargo-audit"

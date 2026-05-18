@@ -1,0 +1,40 @@
+[plugin]
+name        = "build"
+version     = "0.1.0"
+description = "运行 cargo build，检查项目是否能成功编译，并收集构建产物信息"
+author      = "rust-checker"
+category    = "quality"
+tags        = ["build", "compile"]
+
+[command]
+program = "cargo"
+args    = ["build"]
+
+[report]
+parser      = "builtin::build"
+output_path = "quality/build.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "构建结果：ok / error"
+
+[[output_schema.fields]]
+name        = "warnings"
+type        = "integer"
+description = "编译警告数量"
+
+[[output_schema.fields]]
+name        = "errors"
+type        = "integer"
+description = "编译错误数量"
+
+[[output_schema.fields]]
+name        = "duration_secs"
+type        = "float"
+description = "构建耗时（秒）"
+
+[[output_schema.fields]]
+name        = "artifacts"
+type        = "list"
+description = "生成的产物路径列表"

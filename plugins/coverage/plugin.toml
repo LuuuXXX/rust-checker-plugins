@@ -1,0 +1,39 @@
+[plugin]
+name        = "coverage"
+version     = "0.1.0"
+description = "使用 cargo llvm-cov 生成代码覆盖率报告，包含行覆盖率、分支覆盖率及文件级明细"
+author      = "rust-checker"
+category    = "quality"
+tags        = ["coverage", "llvm-cov"]
+
+[command]
+program = "cargo"
+args    = ["llvm-cov", "--all-features"]
+
+[report]
+parser      = "builtin::coverage"
+output_path = "quality/coverage.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error"
+
+[[output_schema.fields]]
+name        = "line_coverage_pct"
+type        = "float"
+description = "总行覆盖率（百分比）"
+
+[[output_schema.fields]]
+name        = "branch_coverage_pct"
+type        = "float"
+description = "总分支覆盖率（百分比）"
+
+[[output_schema.fields]]
+name        = "files"
+type        = "list"
+description = "各文件覆盖率明细列表"
+
+[[dependencies.required]]
+name    = "cargo-llvm-cov"
+install = "cargo install cargo-llvm-cov"
