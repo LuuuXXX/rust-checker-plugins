@@ -1,0 +1,30 @@
+[plugin]
+name        = "binary"
+version     = "0.1.0"
+description = "编译 release 产物并计算 SHA-256，用于二进制一致性检查"
+author      = "rust-checker"
+category    = "compat"
+tags        = ["binary", "reproducible", "sha256"]
+
+[command]
+program = "cargo"
+args    = ["build", "--release"]
+
+[report]
+parser      = "builtin::binary"
+output_path = "compat/binary.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "构建结果：ok / error"
+
+[[output_schema.fields]]
+name        = "artifacts"
+type        = "list"
+description = "产物信息列表（路径 / 大小 / SHA-256）"
+
+[[output_schema.fields]]
+name        = "build_env"
+type        = "string"
+description = "构建环境摘要（OS / Rust 版本 / target）"

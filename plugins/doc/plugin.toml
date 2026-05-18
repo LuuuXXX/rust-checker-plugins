@@ -1,0 +1,40 @@
+[plugin]
+name        = "doc"
+version     = "0.1.0"
+description = "运行 cargo doc --no-deps，检查文档构建警告与公开 API 文档覆盖率"
+author      = "rust-checker"
+category    = "quality"
+tags        = ["doc", "documentation"]
+
+[command]
+program = "cargo"
+args    = ["doc", "--no-deps", "--all-features"]
+
+[report]
+parser      = "builtin::doc"
+output_path = "quality/doc.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "构建结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "warnings"
+type        = "integer"
+description = "文档构建警告数量"
+
+[[output_schema.fields]]
+name        = "errors"
+type        = "integer"
+description = "文档构建错误数量"
+
+[[output_schema.fields]]
+name        = "doc_coverage_pct"
+type        = "float"
+description = "公开 API 文档覆盖率（百分比）"
+
+[[output_schema.fields]]
+name        = "undocumented_items"
+type        = "list"
+description = "未文档化的公开项列表"

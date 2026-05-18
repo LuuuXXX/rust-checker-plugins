@@ -1,0 +1,35 @@
+[plugin]
+name        = "bench"
+version     = "0.1.0"
+description = "运行 cargo bench，执行性能基准测试并收集各基准结果"
+author      = "rust-checker"
+category    = "perf"
+tags        = ["perf", "benchmark", "bench"]
+
+[command]
+program = "cargo"
+args    = ["bench"]
+
+[report]
+parser      = "builtin::bench"
+output_path = "perf/bench.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error"
+
+[[output_schema.fields]]
+name        = "total_benchmarks"
+type        = "integer"
+description = "基准测试总数"
+
+[[output_schema.fields]]
+name        = "slowest_benchmark"
+type        = "string"
+description = "耗时最长的基准名称"
+
+[[output_schema.fields]]
+name        = "results"
+type        = "list"
+description = "各基准结果列表（名称 / 平均耗时 / 标准差 / 吞吐量）"

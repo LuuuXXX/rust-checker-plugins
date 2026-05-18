@@ -1,0 +1,40 @@
+[plugin]
+name        = "clippy"
+version     = "0.1.0"
+description = "运行 cargo clippy，检查代码规范问题，收集 warnings / errors 及 lint 规则明细"
+author      = "rust-checker"
+category    = "quality"
+tags        = ["lint", "clippy", "code-style"]
+
+[command]
+program = "cargo"
+args    = ["clippy", "--all-targets", "--all-features", "--", "-D", "warnings"]
+
+[report]
+parser      = "builtin::clippy"
+output_path = "quality/clippy.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "检查结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "warnings"
+type        = "integer"
+description = "警告数量"
+
+[[output_schema.fields]]
+name        = "errors"
+type        = "integer"
+description = "错误数量"
+
+[[output_schema.fields]]
+name        = "affected_files"
+type        = "integer"
+description = "涉及文件数"
+
+[[output_schema.fields]]
+name        = "diagnostics"
+type        = "list"
+description = "问题详情列表（lint 规则 / 等级 / 文件 / 行号）"

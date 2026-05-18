@@ -1,0 +1,29 @@
+[plugin]
+name        = "semver"
+version     = "0.1.0"
+description = "运行 cargo semver-checks，检测是否存在破坏性 API 变更"
+author      = "rust-checker"
+category    = "compat"
+tags        = ["semver", "api", "breaking-change", "compatibility"]
+
+[command]
+program = "cargo"
+args    = ["semver-checks"]
+
+[report]
+parser      = "builtin::semver"
+output_path = "compat/semver.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "检查结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "breaking_changes"
+type        = "list"
+description = "破坏性变更列表（条目 / 变更类型 / 严重性 / 说明）"
+
+[[dependencies.required]]
+name    = "cargo-semver-checks"
+install = "cargo install cargo-semver-checks"

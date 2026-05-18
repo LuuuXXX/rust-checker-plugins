@@ -1,0 +1,29 @@
+[plugin]
+name        = "udeps"
+version     = "0.1.0"
+description = "运行 cargo +nightly udeps，检测 Cargo.toml 中未实际使用的依赖"
+author      = "rust-checker"
+category    = "deps"
+tags        = ["deps", "unused", "udeps", "nightly"]
+
+[command]
+program = "cargo"
+args    = ["+nightly", "udeps", "--all-targets"]
+
+[report]
+parser      = "builtin::udeps"
+output_path = "deps/udeps.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "检查结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "unused_deps"
+type        = "list"
+description = "未使用依赖列表（包名 / 版本 / 依赖类型）"
+
+[[dependencies.required]]
+name    = "cargo-udeps"
+install = "cargo install cargo-udeps"

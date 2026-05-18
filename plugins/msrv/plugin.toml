@@ -1,0 +1,44 @@
+[plugin]
+name        = "msrv"
+version     = "0.1.0"
+description = "运行 cargo msrv，验证项目声明的最低支持 Rust 版本（MSRV）是否正确"
+author      = "rust-checker"
+category    = "compat"
+tags        = ["msrv", "compatibility", "rust-version"]
+
+[command]
+program = "cargo"
+args    = ["msrv", "--output-format", "json"]
+
+[report]
+parser      = "builtin::msrv"
+output_path = "compat/msrv.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "验证结果：ok / warn / error"
+
+[[output_schema.fields]]
+name        = "declared_msrv"
+type        = "string"
+description = "Cargo.toml 中声明的 rust-version"
+
+[[output_schema.fields]]
+name        = "verified_msrv"
+type        = "string"
+description = "验证通过的最低版本"
+
+[[output_schema.fields]]
+name        = "actual_min_version"
+type        = "string"
+description = "工具检测到的实际最低版本"
+
+[[output_schema.fields]]
+name        = "affecting_deps"
+type        = "list"
+description = "影响 MSRV 的依赖列表"
+
+[[dependencies.required]]
+name    = "cargo-msrv"
+install = "cargo install cargo-msrv"

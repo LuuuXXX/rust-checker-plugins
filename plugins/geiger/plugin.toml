@@ -1,0 +1,54 @@
+[plugin]
+name        = "geiger"
+version     = "0.1.0"
+description = "运行 cargo geiger，统计项目及依赖中 unsafe 代码的分布情况"
+author      = "rust-checker"
+category    = "security"
+tags        = ["unsafe", "geiger", "security"]
+
+[command]
+program = "cargo"
+args    = ["geiger", "--output-format", "Json"]
+
+[report]
+parser      = "builtin::geiger"
+output_path = "security/geiger.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "运行结果：ok / error"
+
+[[output_schema.fields]]
+name        = "unsafe_fns"
+type        = "integer"
+description = "unsafe 函数数量"
+
+[[output_schema.fields]]
+name        = "unsafe_blocks"
+type        = "integer"
+description = "unsafe 代码块数量"
+
+[[output_schema.fields]]
+name        = "unsafe_impls"
+type        = "integer"
+description = "unsafe impl 数量"
+
+[[output_schema.fields]]
+name        = "unsafe_traits"
+type        = "integer"
+description = "unsafe trait 数量"
+
+[[output_schema.fields]]
+name        = "unsafe_lines"
+type        = "integer"
+description = "unsafe 代码行数"
+
+[[output_schema.fields]]
+name        = "top_crates"
+type        = "list"
+description = "unsafe 使用最多的依赖 Top-N"
+
+[[dependencies.required]]
+name    = "cargo-geiger"
+install = "cargo install cargo-geiger"

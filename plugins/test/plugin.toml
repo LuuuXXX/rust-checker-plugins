@@ -1,0 +1,40 @@
+[plugin]
+name        = "test"
+version     = "0.1.0"
+description = "运行 cargo test，收集测试用例通过 / 失败 / 忽略数量及总耗时"
+author      = "rust-checker"
+category    = "quality"
+tags        = ["test", "unit-test"]
+
+[command]
+program = "cargo"
+args    = ["test"]
+
+[report]
+parser      = "builtin::test"
+output_path = "quality/test.md"
+
+[[output_schema.fields]]
+name        = "status"
+type        = "string"
+description = "测试结果：ok / error"
+
+[[output_schema.fields]]
+name        = "passed"
+type        = "integer"
+description = "通过的测试用例数"
+
+[[output_schema.fields]]
+name        = "failed"
+type        = "integer"
+description = "失败的测试用例数"
+
+[[output_schema.fields]]
+name        = "ignored"
+type        = "integer"
+description = "被忽略的测试用例数"
+
+[[output_schema.fields]]
+name        = "duration_secs"
+type        = "float"
+description = "测试总耗时（秒）"
